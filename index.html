@@ -1,56 +1,18 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Przewodnik po Statusie</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- POZIOM 2: ŚREDNI - ENHANCED INTERACTIONS -->
-    <!-- KONCEPCJA: Dodanie subtelnych animacji i micro-interactions -->
-    <!-- NOWE ELEMENTY: -->
-    <!-- 1. Animacje przy ładowaniu i przejściach -->
-    <!-- 2. Efekty hover z transformacjami -->
-    <!-- 3. Płynne scroll'e i fade-in effects -->
-    <!-- 4. Animowane ikony i symbole -->
-    <!-- 5. Progress indicators -->
 
     <style>
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes slideInLeft {
-        from {
-          opacity: 0;
-          transform: translateX(-30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.7;
-        }
-      }
+      /* ZGODNIE Z PROŚBĄ: 
+        Wszystkie style zostały uproszczone, aby pasowały do "vibeu" Strony 1.
+        Usunięto czcionki Google (Inter, Poppins) na rzecz domyślnej czcionki systemowej.
+        Usunięto wszystkie animacje, transformacje i złożone efekty hover.
+        Paleta kolorów została dostosowana do bg-gray-900 i akcentów blue-500.
+      */
 
       * {
         margin: 0;
@@ -58,140 +20,76 @@
         box-sizing: border-box;
       }
 
+      /* Używamy domyślnej czcionki systemowej 'sans' z Tailwind, tak jak w Stronie 1 */
       body {
-        font-family: "Inter", sans-serif;
-        background: #121212;
-        color: #E0E0E0;
+        font-family: ui-sans-serif, system-ui, -apple-system,
+          BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+          "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol", "Noto Color Emoji";
         line-height: 1.6;
       }
 
-      h1,
-      h2,
-      h3 {
-        font-family: "Poppins", sans-serif;
-        color: #6495ED;
-      }
-
-      /* NAWIGACJA Z ANIMACJAMI */
+      /* NAWIGACJA: Uproszczone style */
       .nav-link {
         display: block;
-        padding: 0.875rem 1.25rem;
-        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem; /* rounded-lg */
         font-weight: 500;
-        color: #E0E0E0;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        margin-bottom: 0.5rem;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .nav-link::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 4px;
-        background: #6495ED;
-        transform: scaleY(0);
-        transition: transform 0.3s ease;
+        color: #d1d5db; /* text-gray-200 */
+        transition: background-color 0.2s ease, color 0.2s ease;
       }
 
       .nav-link:hover {
-        background-color: #1E1E1E;
-        color: #6495ED;
-        transform: translateX(8px);
-      }
-
-      .nav-link:hover::before {
-        transform: scaleY(1);
+        background-color: #374151; /* bg-gray-700 */
+        color: #ffffff; /* text-white */
       }
 
       .nav-active {
-        background: #6495ED;
-        color: #121212;
+        background-color: #3b82f6; /* bg-blue-500 */
+        color: #ffffff; /* text-white */
         font-weight: 600;
-        box-shadow: 0 4px 12px rgba(100, 149, 237, 0.3);
-        transform: translateX(8px);
       }
 
-      .nav-active::before {
-        transform: scaleY(1);
-      }
-
-      /* PRZYCISKI JĘZYKÓW Z EFEKTAMI */
+      /* PRZYCISKI JĘZYKÓW: Uproszczone style */
       .lang-btn {
-        background-color: #1E1E1E;
-        border: 2px solid #6495ED;
-        color: #E0E0E0;
-        padding: 0.625rem 1.25rem;
-        border-radius: 0.5rem;
+        background-color: #1f2937; /* bg-gray-800 */
+        border: 2px solid #374151; /* border-gray-700 */
+        color: #d1d5db; /* text-gray-300 */
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem; /* rounded-lg */
         font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s ease;
         cursor: pointer;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .lang-btn::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(100, 149, 237, 0.1);
-        transform: translate(-50%, -50%);
-        transition: width 0.4s ease, height 0.4s ease;
-      }
-
-      .lang-btn:hover::before {
-        width: 300px;
-        height: 300px;
       }
 
       .lang-btn:hover {
-        border-color: #6495ED;
-        color: #6495ED;
-        transform: translateY(-2px);
+        border-color: #60a5fa; /* border-blue-400 */
+        color: #ffffff; /* text-white */
       }
 
       .lang-btn.active {
-        background: #6495ED;
-        color: #121212;
-        border-color: #6495ED;
-        box-shadow: 0 4px 12px rgba(100, 149, 237, 0.25);
-        transform: translateY(-2px);
+        background-color: #3b82f6; /* bg-blue-500 */
+        color: #ffffff; /* text-white */
+        border-color: #3b82f6; /* border-blue-500 */
       }
 
-      /* KARTY Z ANIMACJĄ */
-      .card {
-        background: #1E1E1E;
-        border-radius: 1rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        padding: 2rem;
-        margin-bottom: 2rem;
-        animation: fadeIn 0.6s ease-out;
-        transition: all 0.3s ease;
-      }
-
-      .card:hover {
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-        transform: translateY(-4px);
-      }
-
-      /* TABELA Z ANIMACJAMI */
-      .table-header {
-        background: #6495ED;
-        color: #121212;
+      /* TABELA: Style dopasowane do trybu ciemnego */
+      /* Zmieniono .table-header na .table-header-blue */
+      .table-header-blue {
+        background-color: #3b82f6; /* bg-blue-500 */
+        color: #ffffff; /* text-white */
         font-weight: 700;
-        position: relative;
+      }
+
+      /* NOWY: Nagłówek tabeli (Żółty) */
+      .table-header-yellow {
+        background-color: #f59e0b; /* yellow-500 */
+        color: #111827; /* gray-900 dla kontrastu */
+        font-weight: 700;
       }
 
       .table-cell {
         padding: 1rem;
-        border-bottom: 1px solid #E0E0E0;
         transition: all 0.2s ease;
       }
 
@@ -200,245 +98,120 @@
       }
 
       tbody tr:hover {
-        background-color: #121212;
-        transform: scale(1.01);
+        background-color: #374151; /* bg-gray-700 */
       }
 
       tbody tr:hover .table-cell {
-        color: #E0E0E0;
+        color: #ffffff; /* text-white */
       }
 
       table {
         border-collapse: separate;
         border-spacing: 0;
         overflow: hidden;
-        border-radius: 0.75rem;
+        border-radius: 0.5rem; /* rounded-lg */
       }
 
-      /* PRZYCISKI AKCJI Z ZAAWANSOWANYMI EFEKTAMI */
+      /* PRZYCISKI AKCJI: Uproszczone style */
       .btn-action {
-        background: #6495ED;
-        color: #121212;
-        padding: 0.875rem 1.75rem;
-        border-radius: 0.625rem;
+        background-color: #3b82f6; /* bg-blue-500 */
+        color: #ffffff; /* text-white */
+        padding: 0.75rem 1.75rem;
+        border-radius: 0.5rem; /* rounded-lg */
         font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: background-color 0.2s ease;
         border: none;
         cursor: pointer;
-        box-shadow: 0 4px 12px rgba(100, 149, 237, 0.3);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .btn-action::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s ease, height 0.6s ease;
-      }
-
-      .btn-action:hover::after {
-        width: 300px;
-        height: 300px;
       }
 
       .btn-action:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(100, 149, 237, 0.4);
+        background-color: #2563eb; /* bg-blue-600 */
       }
 
-      .btn-action:active {
-        transform: translateY(-1px);
+      /* NOWY: Przycisk akcji (Żółty) */
+      .btn-action-yellow {
+        background-color: #f59e0b; /* yellow-500 */
+        color: #111827; /* gray-900 dla kontrastu */
+        padding: 0.75rem 1.75rem;
+        border-radius: 0.5rem; /* rounded-lg */
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+        border: none;
+        cursor: pointer;
       }
 
-      /* CYTAT Z ANIMACJĄ */
+      .btn-action-yellow:hover {
+        background-color: #d97706; /* yellow-600 */
+      }
+
+      /* CYTAT: Uproszczony styl */
       blockquote {
-        border-left: 4px solid #6495ED;
-        background: #1E1E1E;
+        border-left: 4px solid #3b82f6; /* border-blue-500 */
+        background-color: rgba(0, 0, 0, 0.2); /* bg-black/20 */
         padding: 1.5rem;
         margin: 1.5rem 0;
         border-radius: 0.5rem;
         font-style: italic;
-        color: #E0E0E0;
-        animation: slideInLeft 0.6s ease-out;
-        position: relative;
-        overflow: hidden;
+        color: #d1d5db; /* text-gray-200 */
       }
 
-      blockquote::before {
-        content: '"';
-        position: absolute;
-        top: -20px;
-        left: 10px;
-        font-size: 120px;
-        color: rgba(100, 149, 237, 0.1);
-        font-family: Georgia, serif;
-      }
-
-      /* NAGŁÓWEK GŁÓWNY Z GRADIENTA */
-      .main-header {
-        background: #1E1E1E;
-        color: #E0E0E0;
-        padding: 2rem;
-        border-radius: 1rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        animation: fadeIn 0.8s ease-out;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .main-header::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        right: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.1) 0%,
-          transparent 70%
-        );
-        animation: pulse 4s ease-in-out infinite;
-      }
-
-      /* BOX ANALIZY Z ANIMACJĄ */
+      /* BOX ANALIZY: Uproszczony styl (Niebieski - domyślny) */
       .analysis-box {
-        background: #1E1E1E;
-        border-left: 4px solid #6495ED;
+        background-color: #374151; /* bg-gray-700 */
+        border-left: 4px solid #3b82f6; /* border-blue-500 */
         padding: 1.5rem;
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         margin-top: 1.5rem;
-        animation: fadeIn 0.5s ease-out;
-        box-shadow: 0 4px 12px rgba(100, 149, 237, 0.2);
       }
 
-      /* LISTA Z ANIMACJĄ */
-      ul li {
-        animation: slideInLeft 0.4s ease-out;
-        animation-fill-mode: both;
-      }
-
-      ul li:nth-child(1) {
-        animation-delay: 0.1s;
-      }
-      ul li:nth-child(2) {
-        animation-delay: 0.15s;
-      }
-      ul li:nth-child(3) {
-        animation-delay: 0.2s;
-      }
-      ul li:nth-child(4) {
-        animation-delay: 0.25s;
-      }
-      ul li:nth-child(5) {
-        animation-delay: 0.3s;
-      }
-      ul li:nth-child(6) {
-        animation-delay: 0.35s;
-      }
-      ul li:nth-child(7) {
-        animation-delay: 0.4s;
-      }
-      ul li:nth-child(8) {
-        animation-delay: 0.45s;
-      }
-      ul li:nth-child(9) {
-        animation-delay: 0.5s;
-      }
-      ul li:nth-child(10) {
-        animation-delay: 0.55s;
-      }
-
-      /* DODATKOWE EFEKTY */
-      .fade-in {
-        animation: fadeIn 0.6s ease-out;
-      }
-
-      /* PROGRESS BAR */
-      .progress-indicator {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 4px;
-        background: #6495ED;
-        width: 0%;
-        transition: width 0.3s ease;
-        z-index: 1000;
-      }
-
-      /* TOOLTIP */
-      [data-tooltip] {
-        position: relative;
-        cursor: help;
-      }
-
-      [data-tooltip]::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-8px);
-        background: #121212;
-        color: #E0E0E0;
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-        font-size: 0.875rem;
-        white-space: nowrap;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-      }
-
-      [data-tooltip]:hover::after {
-        opacity: 1;
-        transform: translateX(-50%) translateY(-12px);
+      /* NOWY: Box analizy (Żółty) */
+      .analysis-box-yellow {
+        background-color: #374151; /* bg-gray-700 */
+        border-left: 4px solid #f59e0b; /* yellow-500 */
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-top: 1.5rem;
       }
     </style>
   </head>
-  <body class="p-4 sm:p-8">
-    <div class="progress-indicator" id="progress-bar"></div>
+  <!-- Dopasowano style body do Strony 1 -->
+  <body class="bg-gray-900 text-gray-200 p-6 md:p-12">
+    <!-- Usunięto Pasek Postępu -->
 
     <div class="max-w-7xl mx-auto">
-      <!-- Header -->
-      <header class="main-header">
-        <div
-          class="flex flex-col sm:flex-row justify-between items-start sm:items-center"
-          style="position: relative; z-index: 1"
-        >
-          <h1 id="main-title" class="text-4xl font-bold mb-4 sm:mb-0"></h1>
-          <div id="lang-selector" class="flex gap-2">
-            <button class="lang-btn active" data-lang="pl">Polski</button>
-            <button class="lang-btn" data-lang="en">English</button>
-            <button class="lang-btn" data-lang="de">Deutsch</button>
-          </div>
+      <!-- Header: Używa teraz Tailwind, usunięto klasę .main-header -->
+      <header
+        class="mb-12 flex flex-col sm:flex-row justify-between items-center gap-4"
+      >
+        <h1
+          id="main-title"
+          class="text-4xl md:text-5xl font-bold text-white text-center sm:text-left"
+        ></h1>
+        <div id="lang-selector" class="flex gap-2 flex-shrink-0">
+          <button class="lang-btn active" data-lang="pl">Polski</button>
+          <button class="lang-btn" data-lang="en">English</button>
+          <button class="lang-btn" data-lang="de">Deutsch</button>
         </div>
       </header>
 
-      <div class="flex flex-col lg:flex-row gap-6">
-        <!-- Navigation -->
+      <!-- Zwiększono odstęp (gap) do 10, jak w Stronie 1 -->
+      <div class="flex flex-col lg:flex-row gap-10">
+        <!-- Nawigacja: Usunięto .card na rzecz klas Tailwind ze Strony 1 -->
         <nav class="lg:w-1/4 lg:sticky lg:top-8 self-start">
-          <div class="card">
+          <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h2
               id="nav-title"
-              class="text-xl font-bold mb-4 text-gray-800"
+              class="text-2xl font-semibold mb-4 text-white"
             ></h2>
             <div id="navigation">
-              <!-- Nav links generated by JS -->
+              <!-- Nav links generowane przez JS -->
             </div>
           </div>
         </nav>
 
         <!-- Main Content -->
         <main class="lg:w-3/4">
-          <!-- Content generated by JS -->
+          <!-- Content generowany przez JS (teraz używa klas Tailwind) -->
         </main>
       </div>
     </div>
@@ -455,15 +228,36 @@
             { id: "rules", title: "10 Zasad Morrisa" },
             { id: "position", title: "Status w teatrze" },
             { id: "comparison", title: "Porównanie Zachowań" },
+            { id: "myths", title: "Rozbijanie Mitów" },
+            { id: "objects", title: "Status Wobec Obiektów" },
             { id: "interactive", title: "Ćwiczenie Interaktywne" },
           ],
           content: {
             definition: {
               title: "Czym jest Status?",
               description:
-                '"Status" jest terminem wprowadzonym do słownika teatralnego przez Keitha Johnstone\'a. Określa on rodzaj interakcji międzyludzkich, opartych na zasadach dominacji i podporządkowania. Został zaczerpnięty z książki Desmonda Morrisa "Ludzkie zoo". Morris, który jest zoologiem, porównywał w niej zachowania ludzi w grupie do zachowań zwierząt stadnych (głównie małp).',
+                'Status według Keitha Johnstone\'a to nieustanna, podskórna negocjacja dotycząca hierarchii, która zachodzi pod niemal każdą ludzką interakcją. To fundamentalna motywacja kierująca "nieświadomą polityką codziennego życia". Zrozumienie tego jest kluczem do tworzenia autentycznych i dynamicznych scen.',
+              customHtml: `
+                <h4 class="text-xl font-semibold text-white mb-3 mt-6">Kluczowe Rozróżnienie dla Studentów</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  Pierwszym błędem jest mylenie dwóch różnych pojęć:
+                </p>
+                <ul class="list-disc list-inside space-y-3 text-lg text-gray-300">
+                  <li>
+                    <strong class="text-white">Status Społeczny (Pozycja):</strong> To, co postać <span class="font-bold text-blue-300">ma</span>. 
+                    Jej formalna ranga (Król, Prezes, Żebrak). Jest to kategoria w dużej mierze statyczna.
+                  </li>
+                  <li>
+                    <strong class="text-white">Status Behawioralny (Działanie):</strong> To, co postać <span class="font-bold text-yellow-300">robi</span>. 
+                    Jest to chwilowa "samoocena" manifestująca się w zachowaniu (np. Prezes grający niski status, by zyskać aprobatę). Jest to kategoria dynamiczna i płynna.
+                  </li>
+                </ul>
+                <p class="text-lg leading-relaxed text-gray-300 mt-4">
+                  Napięcie dramatyczne i komediowe niemal zawsze rodzi się z <strong class="text-white">rozdźwięku</strong> między Pozycją a Statusem (np. Sługa, który kontroluje dom, grając wysoki status).
+                </p>
+              `,
               quote:
-                '"W każdej zorganizowanej grupie ssaków, bez względu na to, jak dalece współpracują one ze sobą, zawsze toczy się walka o społeczną dominację. W wyniku tej walki każdy dorosły osobnik uzyskuje pewną rangę społeczną, która określa jego <strong>pozycję</strong> lub <strong>status</strong> w hierarchii danej grupy."',
+                '"W każdej zorganizowanej grupie ssaków (...) zawsze toczy się walka o społeczną dominację. (...) każdy dorosły osobnik uzyskuje pewną rangę społeczną, która określa jego <strong>pozycję</strong> lub <strong>status</strong> w hierarchii danej grupy." - Desmond Morris, "Ludzkie zoo"',
             },
             rules: {
               title: "10 Zasad Dominacji Morrisa",
@@ -561,6 +355,81 @@
               analysisBHigh:
                 "A (Niski) jest niepewny, przeprasza. B (Wysoki) jest zirytowany przerwą, jego czas jest cenny. A walczy o uwagę B.",
             },
+            myths: {
+              title: "Zaawansowane Koncepcje: Rozbijanie Mitów",
+              description:
+                "Początkujący aktorzy często wpadają w te same pułapki. Opanowanie statusu wymaga zrozumienia tych niuansów.",
+              customHtml: `
+                <h4 class="text-xl font-semibold text-white mb-4 mt-8">Mit 1: "Wysoki = Nieprzyjemny, Niski = Miły"</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  To najczęstszy błąd. Status (dominacja/uległość) i Afekt (przyjemny/nieprzyjemny) to dwie różne osie. Daje to cztery kombinacje:
+                </p>
+                
+                <!-- Wizualna Siatka 2x2 dla Czterech Kwadrantów -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                  
+                  <!-- Wysoki-Nieprzyjemny -->
+                  <div class="bg-gray-900 border-2 border-blue-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-blue-300">Wysoki Status / Nieprzyjemny Afekt</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetyp:</strong> Tyrana, "twardziela", osoby defensywnie dominującej.
+                      <br><span class="text-red-400">(np. Darth Vader, Miranda Priestly)</span>
+                    </p>
+                  </div>
+                  
+                  <!-- Wysoki-Przyjemny -->
+                  <div class="bg-gray-900 border-2 border-blue-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-blue-300">Wysoki Status / Przyjemny Afekt</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetyp:</strong> Charyzmatycznego lidera, pewnego siebie gospodarza. 
+                      <br><span class="text-green-400">(np. Barack Obama, "hojna dusza")</span>
+                    </p>
+                  </div>
+
+                  <!-- Niski-Nieprzyjemny -->
+                  <div class="bg-gray-900 border-2 border-yellow-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-yellow-300">Niski Status / Nieprzyjemny Afekt</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetyp:</strong> Męczennika, osoby pasywno-agresywnej, wiecznie narzekającej.
+                      <br><span class="text-red-400">(Używa "potrzeby" jako broni)</span>
+                    </p>
+                  </div>
+                  
+                  <!-- Niski-Przyjemny -->
+                  <div class="bg-gray-900 border-2 border-yellow-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-yellow-300">Niski Status / Przyjemny Afekt</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetyp:</strong> Lojalnego sługi, pełnego podziwu fana, osoby "szczęśliwej, że tu jest".
+                      <br><span class="text-green-400">(Aktywnie i z radością obniża status)</span>
+                    </p>
+                  </div>
+
+                </div>
+
+                <h4 class="text-xl font-semibold text-white mb-4 mt-8">Mit 2: "Niski Status oznacza Bierność"</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  Błąd. Niski status jest często <strong class="text-yellow-300">skrajnie aktywny</strong>. Jest definiowany przez <strong class="text-white">"potrzebę" (need)</strong>. Postać o niskim statusie aktywnie i desperacko <strong class="text-white">potrzebuje</strong> czegoś od partnera (szacunku, miłości, uwagi, przebaczenia). Ta potrzeba napędza ją do działania: płaszczenia się, żebrania, gorliwego nadskakiwania, by zadowolić partnera.
+                </p>
+              `,
+            },
+            objects: {
+              title: "Status Wobec Obiektów i Przestrzeni",
+              description:
+                "Status można grać nie tylko wobec innych ludzi, ale także wobec obiektów i otoczenia. To niezwykle użyteczne narzędzie aktorskie, które natychmiast buduje postać.",
+              customHtml: `
+                <ul class="list-disc list-inside space-y-3 text-lg text-gray-300 mt-4">
+                  <li>
+                    <strong class="text-white">Przykład 1:</strong> Postać Króla (wysoka pozycja), który czuje się "nieswojo i niebezpiecznie" (niski status) we własnej sali tronowej. Natychmiast wiemy, że jest to król słaby lub zagrożony.
+                  </li>
+                  <li>
+                    <strong class="text-white">Przykład 2:</strong> Postać "twardziela" (wysoki status wobec ludzi) może wejść do ciemnej piwnicy i grać niski status (bać się), co natychmiast czyni ją bardziej ludzką i złożoną.
+                  </li>
+                  <li>
+                    <strong class="text-white">Przykład 3:</strong> Aktor może zadecydować: "Będę grał wysoki status wobec mojego biurka, które znam na wylot, ale niski status wobec karabinu, którego nigdy nie trzymałem w rękach".
+                  </li>
+                </ul>
+              `,
+            },
           },
         },
         en: {
@@ -573,15 +442,36 @@
             { id: "rules", title: "Morris' 10 Rules" },
             { id: "position", title: "Status in Theatre" },
             { id: "comparison", title: "Behavior Comparison" },
+            { id: "myths", title: "Breaking Myths" },
+            { id: "objects", title: "Status Towards Objects" },
             { id: "interactive", title: "Interactive Exercise" },
           ],
           content: {
             definition: {
               title: "What is Status?",
               description:
-                '"Status" is a term introduced to theatrical vocabulary by Keith Johnstone. It defines a type of human interaction based on principles of dominance and submission. The concept was borrowed from Desmond Morris\'s book "The Human Zoo." Morris, a zoologist, compared human group behaviors to herd animal behaviors (mainly primates).',
+                "Status, according to Keith Johnstone, is the constant, subcutaneous negotiation for hierarchy that occurs beneath almost every human interaction. It's the fundamental motivation driving the 'unconscious politics of everyday life.' Understanding this is key to creating authentic and dynamic scenes.",
+              customHtml: `
+                <h4 class="text-xl font-semibold text-white mb-3 mt-6">Key Distinction for Students</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  The first mistake is confusing two different concepts:
+                </p>
+                <ul class="list-disc list-inside space-y-3 text-lg text-gray-300">
+                  <li>
+                    <strong class="text-white">Social Status (Position):</strong> What the character <span class="font-bold text-blue-300">has</span>. 
+                    Their formal rank (King, CEO, Beggar). This category is largely static.
+                  </li>
+                  <li>
+                    <strong class="text-white">Behavioral Status (Action):</strong> What the character <span class="font-bold text-yellow-300">does</span>. 
+                    This is a momentary "self-assessment" manifested in behavior (e.g., a CEO playing low status to gain approval). This category is dynamic and fluid.
+                  </li>
+                </ul>
+                <p class="text-lg leading-relaxed text-gray-300 mt-4">
+                  Dramatic and comedic tension almost always arises from the <strong class="text-white">gap</strong> between Position and Status (e.g., a Servant who controls the house by playing high status).
+                </p>
+              `,
               quote:
-                '"In every organized mammal group, no matter how much they cooperate, there is always a struggle for social dominance. As a result of this struggle, each adult individual achieves a certain social rank that determines their <strong>position</strong> or <strong>status</strong> in the group hierarchy."',
+                '"In every organized mammal group (...) there is always a struggle for social dominance. (...) each adult individual achieves a certain social rank that determines their <strong>position</strong> or <strong>status</strong> in the group hierarchy." - Desmond Morris, "The Human Zoo"',
             },
             rules: {
               title: "Morris's 10 Rules of Dominance",
@@ -682,6 +572,81 @@
               analysisBHigh:
                 "A (Low) is uncertain, apologizes. B (High) is annoyed by the interruption, their time is valuable. A struggles for B's attention.",
             },
+            myths: {
+              title: "Advanced Concepts: Breaking Myths",
+              description:
+                "Beginner actors often fall into the same traps. Mastering status requires understanding these nuances.",
+              customHtml: `
+                <h4 class="text-xl font-semibold text-white mb-4 mt-8">Myth 1: "High = Unpleasant, Low = Nice"</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  This is the most common mistake. Status (dominance/submission) and Affect (pleasant/unpleasant) are two different axes. This gives four combinations:
+                </p>
+                
+                <!-- Visual 2x2 Grid for Four Quadrants -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                  
+                  <!-- High-Unpleasant -->
+                  <div class="bg-gray-900 border-2 border-blue-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-blue-300">High Status / Unpleasant Affect</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetype:</strong> The Tyrant, the "tough guy," defensively dominant.
+                      <br><span class="text-red-400">(e.g., Darth Vader, Miranda Priestly)</span>
+                    </p>
+                  </div>
+                  
+                  <!-- High-Pleasant -->
+                  <div class="bg-gray-900 border-2 border-blue-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-blue-300">High Status / Pleasant Affect</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetype:</strong> The charismatic leader, the confident host.
+                      <br><span class="text-green-400">(e.g., Barack Obama, the "generous soul")</span>
+                    </p>
+                  </div>
+
+                  <!-- Low-Unpleasant -->
+                  <div class="bg-gray-900 border-2 border-yellow-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-yellow-300">Low Status / Unpleasant Affect</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetype:</strong> The Martyr, passive-aggressive, the complainer.
+                      <br><span class="text-red-400">(Uses "need" as a weapon)</span>
+                    </p>
+                  </div>
+                  
+                  <!-- Low-Pleasant -->
+                  <div class="bg-gray-900 border-2 border-yellow-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-yellow-300">Low Status / Pleasant Affect</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetype:</strong> The loyal servant, the adoring fan, "happy to be here."
+                      <br><span class="text-green-400">(Actively and joyfully lowers status)</span>
+                    </p>
+                  </div>
+
+                </div>
+
+                <h4 class="text-xl font-semibold text-white mb-4 mt-8">Myth 2: "Low Status means Passive"</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  Wrong. Low status is often <strong class="text-yellow-300">extremely active</strong>. It is defined by <strong class="text-white">"need"</strong>. A low-status character actively and desperately <strong class="text-white">needs</strong> something from the partner (respect, love, attention, forgiveness). This need drives them to action: groveling, begging, eagerly fawning to please the partner.
+                </p>
+              `,
+            },
+            objects: {
+              title: "Status Towards Objects and Space",
+              description:
+                "Status can be played not only towards other people, but also towards objects and the environment. This is an incredibly useful acting tool that builds character instantly.",
+              customHtml: `
+                <ul class="list-disc list-inside space-y-3 text-lg text-gray-300 mt-4">
+                  <li>
+                    <strong class="text-white">Example 1:</strong> A King (high position) who feels "uneasy and unsafe" (low status) in his own throne room. We immediately know he is a weak or threatened king.
+                  </li>
+                  <li>
+                    <strong class="text-white">Example 2:</strong> A "tough guy" (high status to people) might enter a dark basement and play low status (be afraid), which immediately makes him more human and complex.
+                  </li>
+                  <li>
+                    <strong class="text-white">Example 3:</strong> An actor can decide: "I will play high status towards my desk, which I know inside out, but low status towards the rifle I've never held before."
+                  </li>
+                </ul>
+              `,
+            },
           },
         },
         de: {
@@ -694,15 +659,36 @@
             { id: "rules", title: "Morris' 10 Regeln" },
             { id: "position", title: "Status im Theater" },
             { id: "comparison", title: "Verhaltensvergleich" },
+            { id: "myths", title: "Mythen aufbrechen" },
+            { id: "objects", title: "Status gegenüber Objekten" },
             { id: "interactive", title: "Interaktive Übung" },
           ],
           content: {
             definition: {
               title: "Was ist Status?",
               description:
-                '"Status" ist ein Begriff, der von Keith Johnstone in das Theatervokabular eingeführt wurde. Er definiert eine Art menschlicher Interaktion, die auf Prinzipien von Dominanz und Unterwerfung basiert. Das Konzept wurde aus Desmond Morris\' Buch "Das menschliche Zoo" übernommen. Morris, ein Zoologe, verglich das Gruppenverhalten von Menschen mit dem Herdenverhalten von Tieren (hauptsächlich Primaten).',
+                "Status ist laut Keith Johnstone die ständige, unterbewusste Verhandlung über Hierarchie, die unter fast jeder menschlichen Interaktion stattfindet. Es ist die grundlegende Motivation, die die 'unbewusste Politik des täglichen Lebens' antreibt. Dies zu verstehen ist der Schlüssel zur Schaffung authentischer und dynamischer Szenen.",
+              customHtml: `
+                <h4 class="text-xl font-semibold text-white mb-3 mt-6">Wichtige Unterscheidung für Studierende</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  Der erste Fehler besteht darin, zwei verschiedene Konzepte zu verwechseln:
+                </p>
+                <ul class="list-disc list-inside space-y-3 text-lg text-gray-300">
+                  <li>
+                    <strong class="text-white">Sozialer Status (Position):</strong> Was die Figur <span class="font-bold text-blue-300">hat</span>. 
+                    Ihr formeller Rang (König, CEO, Bettler). Diese Kategorie ist weitgehend statisch.
+                  </li>
+                  <li>
+                    <strong class="text-white">Verhaltensstatus (Aktion):</strong> Was die Figur <span class="font-bold text-yellow-300">tut</span>. 
+                    Dies ist eine vorübergehende "Selbsteinschätzung", die sich im Verhalten manifestiert (z. B. ein CEO, der niedrigen Status spielt, um Zustimmung zu erhalten). Diese Kategorie ist dynamisch und fließend.
+                  </li>
+                </ul>
+                <p class="text-lg leading-relaxed text-gray-300 mt-4">
+                  Dramatische und komödiantische Spannung entsteht fast immer aus der <strong class="text-white">Kluft</strong> zwischen Position und Status (z. B. ein Diener, der das Haus kontrolliert, indem er hohen Status spielt).
+                </p>
+              `,
               quote:
-                '"In jeder organisierten Säugetiergruppe, egal wie sehr sie zusammenarbeiten, gibt es immer einen Kampf um soziale Dominanz. Als Ergebnis dieses Kampfes erreicht jedes erwachsene Individuum einen bestimmten sozialen Rang, der seine <strong>Position</strong> oder seinen <strong>Status</strong> in der Gruppenhierarchie bestimmt."',
+                '"In jeder organisierten Säugetiergruppe (...) gibt es immer einen Kampf um soziale Dominanz. (...) jedes erwachsene Individuum erreicht einen bestimmten sozialen Rang, der seine <strong>Position</strong> oder seinen <strong>Status</strong> in der Gruppenhierarchie bestimmt." - Desmond Morris, "Der menschliche Zoo"',
             },
             rules: {
               title: "Morris' 10 Dominanzregeln",
@@ -803,6 +789,81 @@
               analysisBHigh:
                 "A (Niedrig) ist unsicher, entschuldigt sich. B (Hoch) ist genervt von der Unterbrechung, seine Zeit ist kostbar. A kämpft um Bs Aufmerksamkeit.",
             },
+            myths: {
+              title: "Fortgeschrittene Konzepte: Mythen aufbrechen",
+              description:
+                "Schauspielanfänger tappen oft in dieselben Fallen. Die Beherrschung des Status erfordert das Verständnis dieser Nuancen.",
+              customHtml: `
+                <h4 class="text-xl font-semibold text-white mb-4 mt-8">Mythos 1: "Hoch = Unangenehm, Niedrig = Nett"</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  Dies ist der häufigste Fehler. Status (Dominanz/Unterwerfung) und Affekt (angenehm/unangenehm) sind zwei verschiedene Achsen. Das ergibt vier Kombinationen:
+                </p>
+                
+                <!-- Visuelles 2x2-Raster für Vier Quadranten -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                  
+                  <!-- Hoch-Unangenehm -->
+                  <div class="bg-gray-900 border-2 border-blue-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-blue-300">Hoher Status / Unangenehmer Affekt</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetyp:</strong> Der Tyrann, der "Harte Kerl", defensiv dominant.
+                      <br><span class="text-red-400">(z. B. Darth Vader, Miranda Priestly)</span>
+                    </p>
+                  </div>
+                  
+                  <!-- Hoch-Angenehm -->
+                  <div class="bg-gray-900 border-2 border-blue-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-blue-300">Hoher Status / Angenehmer Affekt</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetyp:</strong> Der charismatische Führer, der selbstbewusste Gastgeber.
+                      <br><span class="text-green-400">(z. B. Barack Obama, die "großzügige Seele")</span>
+                    </p>
+                  </div>
+
+                  <!-- Niedrig-Unangenehm -->
+                  <div class="bg-gray-900 border-2 border-yellow-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-yellow-300">Niedriger Status / Unangenehmer Affekt</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetyp:</strong> Der Märtyrer, passiv-aggressiv, der Nörgler.
+                      <br><span class="text-red-400">(Benutzt "Bedürfnis" als Waffe)</span>
+                    </p>
+                  </div>
+                  
+                  <!-- Niedrig-Angenehm -->
+                  <div class="bg-gray-900 border-2 border-yellow-500 rounded-lg p-4 shadow-lg">
+                    <h5 class="text-lg font-bold text-yellow-300">Niedriger Status / Angenehmer Affekt</h5>
+                    <p class="text-gray-300 mt-1">
+                      <strong class="text-white">Archetyp:</strong> Der loyale Diener, der bewundernde Fan, "glücklich, hier zu sein".
+                      <br><span class="text-green-400">(Senkt aktiv und freudig den Status)</span>
+                    </p>
+                  </div>
+
+                </div>
+
+                <h4 class="text-xl font-semibold text-white mb-4 mt-8">Mythos 2: "Niedriger Status bedeutet Passiv"</h4>
+                <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                  Falsch. Niedriger Status ist oft <strong class="text-yellow-300">extrem aktiv</strong>. Er wird durch <strong class="text-white">"Bedürfnis" (Need)</strong> definiert. Eine Figur mit niedrigem Status <strong class="text-white">braucht</strong> aktiv und verzweifelt etwas vom Partner (Respekt, Liebe, Aufmerksamkeit, Vergebung). Dieses Bedürfnis treibt sie zum Handeln an: kriechen, betteln, sich eifrig einschmeicheln, um dem Partner zu gefallen.
+                </p>
+              `,
+            },
+            objects: {
+              title: "Status gegenüber Objekten und Raum",
+              description:
+                "Status kann nicht nur gegenüber anderen Menschen, sondern auch gegenüber Objekten und der Umgebung gespielt werden. Dies ist ein unglaublich nützliches Schauspielwerkzeug, das sofort Charakter schafft.",
+              customHtml: `
+                <ul class="list-disc list-inside space-y-3 text-lg text-gray-300 mt-4">
+                  <li>
+                    <strong class="text-white">Beispiel 1:</strong> Ein König (hohe Position), der sich in seinem eigenen Thronsaal "unwohl und unsicher" (niedriger Status) fühlt. Wir wissen sofort, dass er ein schwacher oder bedrohter König ist.
+                  </li>
+                  <li>
+                    <strong class="text-white">Beispiel 2:</strong> Ein "Harter Kerl" (hoher Status gegenüber Menschen) betritt einen dunklen Keller und spielt niedrigen Status (hat Angst), was ihn sofort menschlicher und komplexer macht.
+                  </li>
+                  <li>
+                    <strong class="text-white">Beispiel 3:</strong> Ein Schauspieler kann entscheiden: "Ich spiele hohen Status gegenüber meinem Schreibtisch, den ich in- und auswendig kenne, aber niedrigen Status gegenüber dem Gewehr, das ich noch nie gehalten habe."
+                  </li>
+                </ul>
+              `,
+            },
           },
         },
       }
@@ -815,15 +876,9 @@
       const navigation = document.getElementById("navigation")
       const main = document.querySelector("main")
       const langSelector = document.getElementById("lang-selector")
-      const progressBar = document.getElementById("progress-bar")
+      // Usunięto pasek postępu
 
-      // Progress bar update
-      function updateProgressBar() {
-        const sections = langData[currentLang].sections
-        const currentIndex = sections.findIndex((s) => s.id === currentSection)
-        const progress = ((currentIndex + 1) / sections.length) * 100
-        progressBar.style.width = progress + "%"
-      }
+      // Usunięto funkcję paska postępu
 
       function buildNav() {
         const sections = langData[currentLang].sections
@@ -831,14 +886,14 @@
         navigation.innerHTML = sections
           .map(
             (section) => `
-                <a href="#${section.id}" 
-                   class="nav-link ${
-                     section.id === currentSection ? "nav-active" : ""
-                   }" 
-                   data-nav="${section.id}">
-                    ${section.title}
-                </a>
-            `
+                        <a href="#${section.id}" 
+                           class="nav-link ${
+                             section.id === currentSection ? "nav-active" : ""
+                           }" 
+                           data-nav="${section.id}">
+                           ${section.title}
+                        </a>
+                    `
           )
           .join("")
       }
@@ -846,18 +901,27 @@
       function updateContent(sectionId) {
         currentSection = sectionId
         const content = langData[currentLang].content[sectionId]
-        let html = `<section id="${sectionId}" class="card">`
+        
+        // ZASTOSOWANO KLASY TAILWIND (jak w Stronie 1) zamiast .card
+        let html = `<section id="${sectionId}" class="bg-gray-800 p-6 rounded-lg shadow-lg mb-6">`
 
-        html += `<h2 class="text-3xl font-bold mb-6 text-gray-800">${content.title}</h2>`
+        // Zmieniono kolor h2 na text-blue-400 (jak w Stronie 1)
+        html += `<h2 class="text-3xl font-bold mb-6 text-blue-400">${content.title}</h2>`
 
         if (content.description) {
-          html += `<p class="text-lg leading-relaxed text-gray-700 mb-4">${content.description}</p>`
+          // Zmieniono kolor tekstu na text-gray-300
+          html += `<p class="text-lg leading-relaxed text-gray-300 mb-4">${content.description}</p>`
+        }
+        // DODANO: Obsługa niestandardowego HTML
+        if (content.customHtml) {
+          html += content.customHtml
         }
         if (content.quote) {
           html += `<blockquote><p class="text-lg leading-relaxed">${content.quote}</p></blockquote>`
         }
         if (content.list) {
-          html += `<ul class="list-decimal list-outside pl-6 space-y-3 text-lg text-gray-700 mt-4">`
+          // Zmieniono kolor tekstu na text-gray-300
+          html += `<ul class="list-decimal list-outside pl-6 space-y-3 text-lg text-gray-300 mt-4">`
           content.list.forEach((item) => {
             html += `<li>${item}</li>`
           })
@@ -877,7 +941,7 @@
           link.classList.toggle("nav-active", link.dataset.nav === sectionId)
         })
 
-        updateProgressBar()
+        // Usunięto wywołanie paska postępu
 
         if (window.scrollY > 150) {
           window.scrollTo({ top: 100, behavior: "smooth" })
@@ -886,21 +950,24 @@
 
       function buildTable(content) {
         let table = `<div class="overflow-x-auto mt-6">
-                <table class="min-w-full w-full border-collapse">
-                    <thead class="table-header">
-                        <tr>
-                            <th class="table-cell text-left">${content.headers[0]}</th>
-                            <th class="table-cell text-left">${content.highStatus}</th>
-                            <th class="table-cell text-left">${content.lowStatus}</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white">`
+                        <table class="min-w-full w-full">
+                            <!-- Zmieniono na poszczególne klasy dla th -->
+                            <thead>
+                                <tr>
+                                    <th class="table-cell text-left table-header-blue">${content.headers[0]}</th>
+                                    <th class="table-cell text-left table-header-blue">${content.highStatus}</th>
+                                    <th class="table-cell text-left table-header-yellow">${content.lowStatus}</th>
+                                </tr>
+                            </thead>
+                            <!-- Zmieniono tło tabeli na ciemne i dodano linie -->
+                            <tbody class="bg-gray-800 divide-y divide-gray-700">`
         content.rows.forEach((row) => {
+          // Zmieniono kolory tekstu tabeli na czytelne w trybie ciemnym
           table += `<tr>
-                    <td class="table-cell font-semibold text-gray-700">${row[0]}</td>
-                    <td class="table-cell text-gray-600">${row[1]}</td>
-                    <td class="table-cell text-gray-600">${row[2]}</td>
-                </tr>`
+                                <td class="table-cell font-semibold text-gray-200">${row[0]}</td>
+                                <td class="table-cell text-gray-300">${row[1]}</td>
+                                <td class="table-cell text-gray-300">${row[2]}</td>
+                            </tr>`
         })
         table += `</tbody></table></div>`
         return table
@@ -908,40 +975,57 @@
 
       function buildInteractive(content) {
         let interactive = `<div class="space-y-4 mt-6">
-                <p class="text-lg text-gray-700 font-semibold">${
-                  content.scenario
-                }</p>
-                <div class="card bg-gray-50 border-2 border-gray-200">
-                    ${content.dialogue
-                      .map(
-                        (line) =>
-                          `<p class="mb-2"><strong class="font-semibold text-gray-800">${line.speaker}:</strong> ${line.line}</p>`
-                      )
-                      .join("")}
-                </div>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button class="btn-action flex-1" onclick="showAnalysis('A')">${
-                      content.buttonAHigh
-                    }</button>
-                    <button class="btn-action flex-1" onclick="showAnalysis('B')">${
-                      content.buttonBHigh
-                    }</button>
-                </div>
-                <div id="analysis-box" class="hidden analysis-box">
-                    <h4 class="text-xl font-bold text-blue-800 mb-2">${
-                      content.analysisTitle
-                    }</h4>
-                    <p id="analysis-text" class="text-blue-900 leading-relaxed"></p>
-                </div>
-            </div>`
+                            <!-- Zmieniono kolor tekstu na text-gray-300 -->
+                            <p class="text-lg text-gray-300 font-medium">${
+                              content.scenario
+                            }</p>
+                            <!-- Zmieniono tło okna dialogowego na ciemne -->
+                            <div class="bg-gray-900 border-2 border-gray-700 p-6 rounded-lg">
+                                ${content.dialogue
+                                  .map(
+                                    (line) =>
+                                      <!-- Zmieniono kolor tekstu na biały -->
+                                      `<p class="mb-2 text-gray-300"><strong class="font-semibold text-white">${line.speaker}:</strong> ${line.line}</p>`
+                                  )
+                                  .join("")}
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                                <button class="btn-action flex-1" onclick="showAnalysis('A')">${
+                                  content.buttonAHigh
+                                }</button>
+                                <!-- Zmieniono klasę na btn-action-yellow -->
+                                <button class="btn-action-yellow flex-1" onclick="showAnalysis('B')">${
+                                  content.buttonBHigh
+                                }</button>
+                            </div>
+                            <!-- Usunięto domyślną klasę, będzie dodana przez JS -->
+                            <div id="analysis-box" class="hidden">
+                                <!-- Dodano ID dla tytułu -->
+                                <h4 id="analysis-title" class="text-xl font-bold mb-2"></h4>
+                                <p id="analysis-text" class="text-gray-200 leading-relaxed"></p>
+                            </div>
+                        </div>`
 
         window.showAnalysis = (highPlayer) => {
           const box = document.getElementById("analysis-box")
+          const title = document.getElementById("analysis-title") // Pobranie tytułu
           const text = document.getElementById("analysis-text")
           const data = langData[currentLang].content.interactive
 
-          text.textContent =
-            highPlayer === "A" ? data.analysisAHigh : data.analysisBHigh
+          title.textContent = data.analysisTitle // Ustawienie tekstu tytułu
+
+          if (highPlayer === "A") {
+            // A (Wysoki) = Akcent Niebieski
+            text.textContent = data.analysisAHigh
+            box.className = "analysis-box" // Domyślna klasa (niebieska ramka)
+            title.className = "text-xl font-bold text-blue-300 mb-2" // Niebieski tekst
+          } else {
+            // B (Wysoki) = Akcent Żółty
+            text.textContent = data.analysisBHigh
+            box.className = "analysis-box-yellow" // Żółta ramka
+            title.className = "text-xl font-bold text-yellow-300 mb-2" // Żółty tekst
+          }
+
           box.classList.remove("hidden")
         }
 
