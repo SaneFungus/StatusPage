@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Przewodnik po Statusie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- POZIOM 2: ŚREDNI - ENHANCED INTERACTIONS -->
+    <!-- KONCEPCJA: Dodanie subtelnych animacji i micro-interactions -->
+    <!-- NOWE ELEMENTY: -->
+    <!-- 1. Animacje przy ładowaniu i przejściach -->
+    <!-- 2. Efekty hover z transformacjami -->
+    <!-- 3. Płynne scroll'e i fade-in effects -->
+    <!-- 4. Animowane ikony i symbole -->
+    <!-- 5. Progress indicators -->
+
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+        color: #2d3748;
+        line-height: 1.6;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* NAWIGACJA Z ANIMACJAMI */
+      .nav-link {
+        display: block;
+        padding: 0.875rem 1.25rem;
+        border-radius: 0.75rem;
+        font-weight: 500;
+        color: #4a5568;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-bottom: 0.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: #e2e8f0;
+        color: #2d3748;
+        transform: translateX(8px);
+      }
+
+      .nav-link:hover::before {
+        transform: scaleY(1);
+      }
+
+      .nav-active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        transform: translateX(8px);
+      }
+
+      .nav-active::before {
+        transform: scaleY(1);
+      }
+
+      /* PRZYCISKI JĘZYKÓW Z EFEKTAMI */
+      .lang-btn {
+        background-color: white;
+        border: 2px solid #e2e8f0;
+        color: #4a5568;
+        padding: 0.625rem 1.25rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lang-btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(102, 126, 234, 0.1);
+        transform: translate(-50%, -50%);
+        transition: width 0.4s ease, height 0.4s ease;
+      }
+
+      .lang-btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .lang-btn:hover {
+        border-color: #667eea;
+        color: #667eea;
+        transform: translateY(-2px);
+      }
+
+      .lang-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        transform: translateY(-2px);
+      }
+
+      /* KARTY Z ANIMACJĄ */
+      .card {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        animation: fadeIn 0.6s ease-out;
+        transition: all 0.3s ease;
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-4px);
+      }
+
+      /* TABELA Z ANIMACJAMI */
+      .table-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-weight: 700;
+        position: relative;
+      }
+
+      .table-cell {
+        padding: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+      }
+
+      tbody tr {
+        transition: all 0.2s ease;
+      }
+
+      tbody tr:hover {
+        background-color: #f7fafc;
+        transform: scale(1.01);
+      }
+
+      tbody tr:hover .table-cell {
+        color: #2d3748;
+      }
+
+      table {
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border-radius: 0.75rem;
+      }
+
+      /* PRZYCISKI AKCJI Z ZAAWANSOWANYMI EFEKTAMI */
+      .btn-action {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        padding: 0.875rem 1.75rem;
+        border-radius: 0.625rem;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-action::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+      }
+
+      .btn-action:hover::after {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn-action:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(72, 187, 120, 0.4);
+      }
+
+      .btn-action:active {
+        transform: translateY(-1px);
+      }
+
+      /* CYTAT Z ANIMACJĄ */
+      blockquote {
+        border-left: 4px solid #667eea;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 0.5rem;
+        font-style: italic;
+        color: #4a5568;
+        animation: slideInLeft 0.6s ease-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      blockquote::before {
+        content: '"';
+        position: absolute;
+        top: -20px;
+        left: 10px;
+        font-size: 120px;
+        color: rgba(102, 126, 234, 0.1);
+        font-family: Georgia, serif;
+      }
+
+      /* NAGŁÓWEK GŁÓWNY Z GRADIENTA */
+      .main-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.25);
+        animation: fadeIn 0.8s ease-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .main-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      /* BOX ANALIZY Z ANIMACJĄ */
+      .analysis-box {
+        background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        border-left: 4px solid #0ea5e9;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        margin-top: 1.5rem;
+        animation: fadeIn 0.5s ease-out;
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+      }
+
+      /* LISTA Z ANIMACJĄ */
+      ul li {
+        animation: slideInLeft 0.4s ease-out;
+        animation-fill-mode: both;
+      }
+
+      ul li:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      ul li:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      ul li:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      ul li:nth-child(4) {
+        animation-delay: 0.25s;
+      }
+      ul li:nth-child(5) {
+        animation-delay: 0.3s;
+      }
+      ul li:nth-child(6) {
+        animation-delay: 0.35s;
+      }
+      ul li:nth-child(7) {
+        animation-delay: 0.4s;
+      }
+      ul li:nth-child(8) {
+        animation-delay: 0.45s;
+      }
+      ul li:nth-child(9) {
+        animation-delay: 0.5s;
+      }
+      ul li:nth-child(10) {
+        animation-delay: 0.55s;
+      }
+
+      /* DODATKOWE EFEKTY */
+      .fade-in {
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      /* PROGRESS BAR */
+      .progress-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        width: 0%;
+        transition: width 0.3s ease;
+        z-index: 1000;
+      }
+
+      /* TOOLTIP */
+      [data-tooltip] {
+        position: relative;
+        cursor: help;
+      }
+
+      [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        background: #2d3748;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      [data-tooltip]:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-12px);
+      }
+    </style>
+  </head>
+  <body class="p-4 sm:p-8">
+    <div class="progress-indicator" id="progress-bar"></div>
+
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <header class="main-header">
+        <div
+          class="flex flex-col sm:flex-row justify-between items-start sm:items-center"
+          style="position: relative; z-index: 1"
+        >
+          <h1 id="main-title" class="text-4xl font-bold mb-4 sm:mb-0"></h1>
+          <div id="lang-selector" class="flex gap-2">
+            <button class="lang-btn active" data-lang="pl">Polski</button>
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="de">Deutsch</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="flex flex-col lg:flex-row gap-6">
+        <!-- Navigation -->
+        <nav class="lg:w-1/4 lg:sticky lg:top-8 self-start">
+          <div class="card">
+            <h2
+              id="nav-title"
+              class="text-xl font-bold mb-4 text-gray-800"
+            ></h2>
+            <div id="navigation">
+              <!-- Nav links generated by JS -->
+            </div>
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="lg:w-3/4">
+          <!-- Content generated by JS -->
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const langData = {
+        pl: {
+          lang: "pl-PL",
+          langName: "Polski",
+          title: "Interaktywny Przewodnik po Statusie",
+          nav: "Nawigacja",
+          sections: [
+            { id: "definition", title: "Definicja" },
+            { id: "rules", title: "10 Zasad Morrisa" },
+            { id: "position", title: "Status w teatrze" },
+            { id: "comparison", title: "Porównanie Zachowań" },
+            { id: "interactive", title: "Ćwiczenie Interaktywne" },
+          ],
+          content: {
+            definition: {
+              title: "Czym jest Status?",
+              description:
+                '"Status" jest terminem wprowadzonym do słownika teatralnego przez Keitha Johnstone\'a. Określa on rodzaj interakcji międzyludzkich, opartych na zasadach dominacji i podporządkowania. Został zaczerpnięty z książki Desmonda Morrisa "Ludzkie zoo". Morris, który jest zoologiem, porównywał w niej zachowania ludzi w grupie do zachowań zwierząt stadnych (głównie małp).',
+              quote:
+                '"W każdej zorganizowanej grupie ssaków, bez względu na to, jak dalece współpracują one ze sobą, zawsze toczy się walka o społeczną dominację. W wyniku tej walki każdy dorosły osobnik uzyskuje pewną rangę społeczną, która określa jego <strong>pozycję</strong> lub <strong>status</strong> w hierarchii danej grupy."',
+            },
+            rules: {
+              title: "10 Zasad Dominacji Morrisa",
+              description:
+                'Morris wymienia następnie dziesięć "złotych reguł", które stosują się do wszystkich, którzy chcą rządzić grupą i utrzymać się przy władzy (bez względu na to, czy jest to pawian, czy współczesny prezydent):',
+              list: [
+                "Należy wyraźnie demonstrować strój, postawę i gesty znamionujące dominację.",
+                "W chwilach rywalizacji należy znacząco pogrozić podwładnym.",
+                "W chwilach zagrożeń fizycznych należy dysponować odpowiednią siłą, aby osobiście lub przez swoich przedstawicieli użyć jej do opanowania poddanych.",
+                "Jeżeli zagrożenie wymaga posłużenia się raczej mózgiem niż mięśniami, należy przechytrzyć swoich podwładnych.",
+                "Należy tłumić waśnie, które wybuchają między podwładnymi.",
+                "Należy nagradzać swoich podwładnych.",
+                "Należy chronić słabszych członków grupy, zwłaszcza przed prześladowaniami z zewnątrz.",
+                "Należy sprawiedliwie rozdzielać przywileje.",
+                "Należy panować nad grupą, ale nie wolno nadmiernie jej uciskać.",
+                "Należy umieć zrezygnować z władzy.",
+              ],
+            },
+            position: {
+              title: "Status w Kontekście Teatralnym",
+              description:
+                "W pracy Johnstone'a, status odnosi się do względnej pozycji społecznej, jaką postać przyjmuje w scenie. Jest to koncepcja dynamiczna; można ją podnosić lub obniżać poprzez mowę ciała, kontakt wzrokowy i działania. Zrozumienie i świadoma gra statusem jest fundamentalna dla improwizacji, ponieważ to właśnie różnice w statusie napędzają akcję i tworzą interesujące relacje.",
+            },
+            comparison: {
+              title: "Porównanie Zachowań Wysokiego i Niskiego Statusu",
+              highStatus: "Wysoki Status (Dominujący)",
+              lowStatus: "Niski Status (Podporządkowany)",
+              headers: ["Aspekt", "Wysoki Status", "Niski Status"],
+              rows: [
+                [
+                  "Kontakt wzrokowy",
+                  "Utrzymuje. Patrzy i odwraca wzrok, kiedy chce. Nie mruga.",
+                  "Unika. Mruga. Patrzy, gdy nikt nie widzi.",
+                ],
+                [
+                  "Postawa",
+                  "Rozluźniona, otwarta, zajmuje dużo miejsca. Nieruchoma głowa.",
+                  "Spięta, zamknięta, stara się być mała. Pochylona głowa.",
+                ],
+                [
+                  "Ruchy",
+                  "Powolne, pewne, spokojne. Gestykulacja minimalna lub szeroka.",
+                  "Szybkie, nerwowe. Dużo gestów, często nieistotnych.",
+                ],
+                [
+                  "Przestrzeń osobista",
+                  "Dużo miejsca. Wchodzi w przestrzeń innych.",
+                  "Mało miejsca. Pozwala innym wchodzić w swoją przestrzeń.",
+                ],
+                [
+                  "Reakcja na dotyk",
+                  "Nie reaguje albo ignoruje.",
+                  "Zauważa, odsuwa się lub wydaje się zaskoczony.",
+                ],
+                [
+                  "Głos",
+                  "Głośny, wyraźny, wolny. Używa pauz.",
+                  "Cichy, szybki, niepewny. Może być piskliwy.",
+                ],
+                [
+                  "Reakcja na błędy",
+                  "Ignoruje lub bagatellizuje. Obwinia innych.",
+                  "Przeprasza, tłumaczy się, wini siebie.",
+                ],
+                [
+                  "Inicjatywa",
+                  "Podejmuje decyzje. Mówi pierwszy. Przerywa.",
+                  "Czeka na sygnał. Mówi na końcu. Daje się przerywać.",
+                ],
+                [
+                  "Ogólne wrażenie",
+                  "Kontroli, pewności siebie, władzy.",
+                  "Niepewności, podległości, potrzeby akceptacji.",
+                ],
+              ],
+            },
+            interactive: {
+              title: "Interaktywne Ćwiczenie: Analiza Statusu",
+              scenario:
+                "Przeczytaj poniższy dialog. Następnie kliknij jeden z przycisków, aby zobaczyć analizę, w której A lub B ma wyższy status. Zwróć uwagę, jak ta sama wymiana może być zagrana na różne sposoby w zależności od intencji i statusu postaci.",
+              dialogue: [
+                { speaker: "A", line: "Przepraszam, że przeszkadzam..." },
+                {
+                  speaker: "B",
+                  line: "Co się stało? Mam teraz naprawdę dużo pracy.",
+                },
+                { speaker: "A", line: "Ten raport dla szefa. Termin jutro." },
+                { speaker: "B", line: "Ach, ten. No dobra, o co chodzi?" },
+              ],
+              buttonAHigh: "A (Wysoki) / B (Niski)",
+              buttonBHigh: "A (Niski) / B (Wysoki)",
+              analysisTitle: "Analiza:",
+              analysisAHigh:
+                "A (Wysoki) jest spokojny, zakłada, że B ma dla niego czas. B (Niski) jest zdenerwowany, jego pośpiech to wymówka, łatwo daje się zastraszyć. A kontroluje sytuację.",
+              analysisBHigh:
+                "A (Niski) jest niepewny, przeprasza. B (Wysoki) jest zirytowany przerwą, jego czas jest cenny. A walczy o uwagę B.",
+            },
+          },
+        },
+        en: {
+          lang: "en-US",
+          langName: "English",
+          title: "Interactive Guide to Status",
+          nav: "Navigation",
+          sections: [
+            { id: "definition", title: "Definition" },
+            { id: "rules", title: "Morris' 10 Rules" },
+            { id: "position", title: "Status in Theatre" },
+            { id: "comparison", title: "Behavior Comparison" },
+            { id: "interactive", title: "Interactive Exercise" },
+          ],
+          content: {
+            definition: {
+              title: "What is Status?",
+              description:
+                '"Status" is a term introduced to theatrical vocabulary by Keith Johnstone. It defines a type of human interaction based on principles of dominance and submission. The concept was borrowed from Desmond Morris\'s book "The Human Zoo." Morris, a zoologist, compared human group behaviors to herd animal behaviors (mainly primates).',
+              quote:
+                '"In every organized mammal group, no matter how much they cooperate, there is always a struggle for social dominance. As a result of this struggle, each adult individual achieves a certain social rank that determines their <strong>position</strong> or <strong>status</strong> in the group hierarchy."',
+            },
+            rules: {
+              title: "Morris's 10 Rules of Dominance",
+              description:
+                'Morris lists ten "golden rules" that apply to anyone who wants to rule a group and maintain power (whether it\'s a baboon or a modern president):',
+              list: [
+                "Clearly demonstrate attire, posture, and gestures signifying dominance.",
+                "In moments of competition, significantly threaten subordinates.",
+                "In moments of physical threat, possess sufficient strength to personally or through representatives use it to control subjects.",
+                "If the threat requires using brains rather than muscles, outsmart your subordinates.",
+                "Suppress feuds that break out among subordinates.",
+                "Reward your subordinates.",
+                "Protect weaker members of the group, especially from external persecution.",
+                "Distribute privileges fairly.",
+                "Rule the group but do not oppress it excessively.",
+                "Know when to relinquish power.",
+              ],
+            },
+            position: {
+              title: "Status in Theatrical Context",
+              description:
+                "In Johnstone's work, status refers to the relative social position a character takes in a scene. It's a dynamic concept; it can be raised or lowered through body language, eye contact, and actions. Understanding and consciously playing with status is fundamental to improvisation, as status differences drive action and create interesting relationships.",
+            },
+            comparison: {
+              title: "High vs. Low Status Behavior Comparison",
+              highStatus: "High Status (Dominant)",
+              lowStatus: "Low Status (Submissive)",
+              headers: ["Aspect", "High Status", "Low Status"],
+              rows: [
+                [
+                  "Eye contact",
+                  "Maintains. Looks and looks away when they want. Doesn't blink.",
+                  "Avoids. Blinks. Looks when no one is watching.",
+                ],
+                [
+                  "Posture",
+                  "Relaxed, open, takes up much space. Still head.",
+                  "Tense, closed, tries to be small. Bent head.",
+                ],
+                [
+                  "Movements",
+                  "Slow, confident, calm. Minimal or broad gestures.",
+                  "Quick, nervous. Many gestures, often irrelevant.",
+                ],
+                [
+                  "Personal space",
+                  "Much space. Enters others' space.",
+                  "Little space. Lets others enter their space.",
+                ],
+                [
+                  "Reaction to touch",
+                  "Doesn't react or ignores.",
+                  "Notices, moves away, or seems surprised.",
+                ],
+                [
+                  "Voice",
+                  "Loud, clear, slow. Uses pauses.",
+                  "Quiet, fast, uncertain. May be squeaky.",
+                ],
+                [
+                  "Reaction to mistakes",
+                  "Ignores or trivializes. Blames others.",
+                  "Apologizes, explains, blames self.",
+                ],
+                [
+                  "Initiative",
+                  "Makes decisions. Speaks first. Interrupts.",
+                  "Waits for signal. Speaks last. Lets others interrupt.",
+                ],
+                [
+                  "General impression",
+                  "Control, confidence, power.",
+                  "Uncertainty, submission, need for acceptance.",
+                ],
+              ],
+            },
+            interactive: {
+              title: "Interactive Exercise: Status Analysis",
+              scenario:
+                "Read the dialogue below. Then click one of the buttons to see an analysis where A or B has higher status. Notice how the same exchange can be played in different ways depending on character intention and status.",
+              dialogue: [
+                { speaker: "A", line: "Sorry to bother you..." },
+                {
+                  speaker: "B",
+                  line: "What happened? I'm really busy right now.",
+                },
+                {
+                  speaker: "A",
+                  line: "That report for the boss. Due tomorrow.",
+                },
+                { speaker: "B", line: "Oh, that one. Alright, what about it?" },
+              ],
+              buttonAHigh: "A (High) / B (Low)",
+              buttonBHigh: "A (Low) / B (High)",
+              analysisTitle: "Analysis:",
+              analysisAHigh:
+                "A (High) is calm, assumes B has time for them. B (Low) is nervous, their rush is an excuse, easily intimidated. A controls the situation.",
+              analysisBHigh:
+                "A (Low) is uncertain, apologizes. B (High) is annoyed by the interruption, their time is valuable. A struggles for B's attention.",
+            },
+          },
+        },
+        de: {
+          lang: "de-DE",
+          langName: "Deutsch",
+          title: "Interaktiver Leitfaden zum Status",
+          nav: "Navigation",
+          sections: [
+            { id: "definition", title: "Definition" },
+            { id: "rules", title: "Morris' 10 Regeln" },
+            { id: "position", title: "Status im Theater" },
+            { id: "comparison", title: "Verhaltensvergleich" },
+            { id: "interactive", title: "Interaktive Übung" },
+          ],
+          content: {
+            definition: {
+              title: "Was ist Status?",
+              description:
+                '"Status" ist ein Begriff, der von Keith Johnstone in das Theatervokabular eingeführt wurde. Er definiert eine Art menschlicher Interaktion, die auf Prinzipien von Dominanz und Unterwerfung basiert. Das Konzept wurde aus Desmond Morris\' Buch "Das menschliche Zoo" übernommen. Morris, ein Zoologe, verglich das Gruppenverhalten von Menschen mit dem Herdenverhalten von Tieren (hauptsächlich Primaten).',
+              quote:
+                '"In jeder organisierten Säugetiergruppe, egal wie sehr sie zusammenarbeiten, gibt es immer einen Kampf um soziale Dominanz. Als Ergebnis dieses Kampfes erreicht jedes erwachsene Individuum einen bestimmten sozialen Rang, der seine <strong>Position</strong> oder seinen <strong>Status</strong> in der Gruppenhierarchie bestimmt."',
+            },
+            rules: {
+              title: "Morris' 10 Dominanzregeln",
+              description:
+                'Morris listet zehn "goldene Regeln" auf, die für jeden gelten, der eine Gruppe beherrschen und an der Macht bleiben möchte (egal ob Pavian oder moderner Präsident):',
+              list: [
+                "Zeigen Sie deutlich Kleidung, Haltung und Gesten, die Dominanz signalisieren.",
+                "In Wettbewerbsmomenten drohen Sie den Untergebenen deutlich.",
+                "Bei körperlichen Bedrohungen verfügen Sie über ausreichend Kraft, um sie persönlich oder durch Vertreter zur Kontrolle der Untertanen einzusetzen.",
+                "Wenn die Bedrohung eher Gehirn als Muskeln erfordert, überlisten Sie Ihre Untergebenen.",
+                "Unterdrücken Sie Fehden, die unter Untergebenen ausbrechen.",
+                "Belohnen Sie Ihre Untergebenen.",
+                "Schützen Sie schwächere Gruppenmitglieder, insbesondere vor externer Verfolgung.",
+                "Verteilen Sie Privilegien gerecht.",
+                "Beherrschen Sie die Gruppe, aber unterdrücken Sie sie nicht übermäßig.",
+                "Wissen Sie, wann Sie die Macht abgeben müssen.",
+              ],
+            },
+            position: {
+              title: "Status im theatralischen Kontext",
+              description:
+                "In Johnstones Arbeit bezieht sich Status auf die relative soziale Position, die eine Figur in einer Szene einnimmt. Es ist ein dynamisches Konzept; es kann durch Körpersprache, Blickkontakt und Handlungen erhöht oder gesenkt werden. Das Verstehen und bewusste Spielen mit Status ist für die Improvisation grundlegend, da Statusunterschiede die Handlung vorantreiben und interessante Beziehungen schaffen.",
+            },
+            comparison: {
+              title: "Vergleich von hohem und niedrigem Statusverhalten",
+              highStatus: "Hoher Status (Dominant)",
+              lowStatus: "Niedriger Status (Unterwürfig)",
+              headers: ["Aspekt", "Hoher Status", "Niedriger Status"],
+              rows: [
+                [
+                  "Blickkontakt",
+                  "Hält ihn. Schaut hin und weg, wann er will. Blinzelt nicht.",
+                  "Vermeidet ihn. Blinzelt. Schaut, wenn niemand zusieht.",
+                ],
+                [
+                  "Haltung",
+                  "Entspannt, offen, nimmt viel Platz ein. Ruhiger Kopf.",
+                  "Angespannt, geschlossen, versucht klein zu sein. Geneigter Kopf.",
+                ],
+                [
+                  "Bewegungen",
+                  "Langsam, selbstbewusst, ruhig. Minimale oder breite Gesten.",
+                  "Schnell, nervös. Viele Gesten, oft irrelevant.",
+                ],
+                [
+                  "Persönlicher Raum",
+                  "Viel Platz. Betritt Raum anderer.",
+                  "Wenig Platz. Lässt andere in seinen Raum.",
+                ],
+                [
+                  "Reaktion auf Berührung",
+                  "Reagiert nicht oder ignoriert.",
+                  "Bemerkt, weicht zurück oder wirkt überrascht.",
+                ],
+                [
+                  "Stimme",
+                  "Laut, klar, langsam. Nutzt Pausen.",
+                  "Leise, schnell, unsicher. Kann quietschig sein.",
+                ],
+                [
+                  "Reaktion auf Fehler",
+                  "Ignoriert oder bagatellisiert. Beschuldigt andere.",
+                  "Entschuldigt sich, erklärt, beschuldigt sich selbst.",
+                ],
+                [
+                  "Initiative",
+                  "Trifft Entscheidungen. Spricht zuerst. Unterbricht.",
+                  "Wartet auf Signal. Spricht zuletzt. Lässt sich unterbrechen.",
+                ],
+                [
+                  "Gesamteindruck",
+                  "Kontrolle, Selbstvertrauen, Macht.",
+                  "Unsicherheit, Unterwerfung, Akzeptanzbedürfnis.",
+                ],
+              ],
+            },
+            interactive: {
+              title: "Interaktive Übung: Statusanalyse",
+              scenario:
+                "Lesen Sie den untenstehenden Dialog. Klicken Sie dann auf einen der Buttons, um eine Analyse zu sehen, in der A oder B höheren Status hat. Beachten Sie, wie derselbe Austausch auf verschiedene Weise gespielt werden kann, abhängig von Absicht und Status der Figur.",
+              dialogue: [
+                { speaker: "A", line: "Entschuldigung für die Störung..." },
+                {
+                  speaker: "B",
+                  line: "Was ist passiert? Ich bin gerade wirklich beschäftigt.",
+                },
+                {
+                  speaker: "A",
+                  line: "Der Bericht für den Chef. Fällig morgen.",
+                },
+                { speaker: "B", line: "Ach, der. Na gut, was ist damit?" },
+              ],
+              buttonAHigh: "A (Hoch) / B (Niedrig)",
+              buttonBHigh: "A (Niedrig) / B (Hoch)",
+              analysisTitle: "Analyse:",
+              analysisAHigh:
+                "A (Hoch) ist ruhig, geht davon aus, dass B Zeit für ihn hat. B (Niedrig) ist nervös, seine Eile ist eine Ausrede, lässt sich leicht einschüchtern. A kontrolliert die Situation.",
+              analysisBHigh:
+                "A (Niedrig) ist unsicher, entschuldigt sich. B (Hoch) ist genervt von der Unterbrechung, seine Zeit ist kostbar. A kämpft um Bs Aufmerksamkeit.",
+            },
+          },
+        },
+      }
+
+      let currentLang = "pl"
+      let currentSection = langData.pl.sections[0].id
+
+      const mainTitle = document.getElementById("main-title")
+      const navTitle = document.getElementById("nav-title")
+      const navigation = document.getElementById("navigation")
+      const main = document.querySelector("main")
+      const langSelector = document.getElementById("lang-selector")
+      const progressBar = document.getElementById("progress-bar")
+
+      // Progress bar update
+      function updateProgressBar() {
+        const sections = langData[currentLang].sections
+        const currentIndex = sections.findIndex((s) => s.id === currentSection)
+        const progress = ((currentIndex + 1) / sections.length) * 100
+        progressBar.style.width = progress + "%"
+      }
+
+      function buildNav() {
+        const sections = langData[currentLang].sections
+        navTitle.textContent = langData[currentLang].nav
+        navigation.innerHTML = sections
+          .map(
+            (section) => `
+                <a href="#${section.id}" 
+                   class="nav-link ${
+                     section.id === currentSection ? "nav-active" : ""
+                   }" 
+                   data-nav="${section.id}">
+                    ${section.title}
+                </a>
+            `
+          )
+          .join("")
+      }
+
+      function updateContent(sectionId) {
+        currentSection = sectionId
+        const content = langData[currentLang].content[sectionId]
+        let html = `<section id="${sectionId}" class="card">`
+
+        html += `<h2 class="text-3xl font-bold mb-6 text-gray-800">${content.title}</h2>`
+
+        if (content.description) {
+          html += `<p class="text-lg leading-relaxed text-gray-700 mb-4">${content.description}</p>`
+        }
+        if (content.quote) {
+          html += `<blockquote><p class="text-lg leading-relaxed">${content.quote}</p></blockquote>`
+        }
+        if (content.list) {
+          html += `<ul class="list-decimal list-outside pl-6 space-y-3 text-lg text-gray-700 mt-4">`
+          content.list.forEach((item) => {
+            html += `<li>${item}</li>`
+          })
+          html += `</ul>`
+        }
+        if (content.rows) {
+          html += buildTable(content)
+        }
+        if (content.dialogue) {
+          html += buildInteractive(content)
+        }
+
+        html += `</section>`
+        main.innerHTML = html
+
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.classList.toggle("nav-active", link.dataset.nav === sectionId)
+        })
+
+        updateProgressBar()
+
+        if (window.scrollY > 150) {
+          window.scrollTo({ top: 100, behavior: "smooth" })
+        }
+      }
+
+      function buildTable(content) {
+        let table = `<div class="overflow-x-auto mt-6">
+                <table class="min-w-full w-full border-collapse">
+                    <thead class="table-header">
+                        <tr>
+                            <th class="table-cell text-left">${content.headers[0]}</th>
+                            <th class="table-cell text-left">${content.highStatus}</th>
+                            <th class="table-cell text-left">${content.lowStatus}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">`
+        content.rows.forEach((row) => {
+          table += `<tr>
+                    <td class="table-cell font-semibold text-gray-700">${row[0]}</td>
+                    <td class="table-cell text-gray-600">${row[1]}</td>
+                    <td class="table-cell text-gray-600">${row[2]}</td>
+                </tr>`
+        })
+        table += `</tbody></table></div>`
+        return table
+      }
+
+      function buildInteractive(content) {
+        let interactive = `<div class="space-y-4 mt-6">
+                <p class="text-lg text-gray-700 font-semibold">${
+                  content.scenario
+                }</p>
+                <div class="card bg-gray-50 border-2 border-gray-200">
+                    ${content.dialogue
+                      .map(
+                        (line) =>
+                          `<p class="mb-2"><strong class="font-semibold text-gray-800">${line.speaker}:</strong> ${line.line}</p>`
+                      )
+                      .join("")}
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button class="btn-action flex-1" onclick="showAnalysis('A')">${
+                      content.buttonAHigh
+                    }</button>
+                    <button class="btn-action flex-1" onclick="showAnalysis('B')">${
+                      content.buttonBHigh
+                    }</button>
+                </div>
+                <div id="analysis-box" class="hidden analysis-box">
+                    <h4 class="text-xl font-bold text-blue-800 mb-2">${
+                      content.analysisTitle
+                    }</h4>
+                    <p id="analysis-text" class="text-blue-900 leading-relaxed"></p>
+                </div>
+            </div>`
+
+        window.showAnalysis = (highPlayer) => {
+          const box = document.getElementById("analysis-box")
+          const text = document.getElementById("analysis-text")
+          const data = langData[currentLang].content.interactive
+
+          text.textContent =
+            highPlayer === "A" ? data.analysisAHigh : data.analysisBHigh
+          box.classList.remove("hidden")
+        }
+
+        return interactive
+      }
+
+      function setLanguage(lang) {
+        currentLang = lang
+        document.documentElement.lang = langData[lang].lang
+
+        mainTitle.textContent = langData[lang].title
+        document.title = langData[lang].title
+
+        langSelector.querySelectorAll("button").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === lang)
+        })
+
+        buildNav()
+        updateContent(currentSection)
+      }
+
+      navigation.addEventListener("click", (e) => {
+        e.preventDefault()
+        const navLink = e.target.closest(".nav-link")
+        if (navLink) {
+          updateContent(navLink.dataset.nav)
+        }
+      })
+
+      langSelector.addEventListener("click", (e) => {
+        if (e.target.tagName === "BUTTON") {
+          setLanguage(e.target.dataset.lang)
+        }
+      })
+
+      setLanguage(currentLang)
+    </script>
+  </body>
+</html>
